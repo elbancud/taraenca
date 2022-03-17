@@ -1,20 +1,20 @@
 import { useState } from 'react';
-
-
-
+//icons
 import { Sling as Hamburger } from 'hamburger-react';
-
 //util
 import Image from 'next/image';
-
+//image
 //components
 import AdminSidenav from '../Components/AdminSidenav';
-
-//image
-import taraenca from '../pages/Assets/taraenca.png'
 import AdminHome from '../Components/AdminHome';
+import AdminItems from '../Components/AdminItems';
+import AdminAccounts from '../Components/AdminAccounts';
+import taraenca from '../pages/Assets/taraenca.png'
+import AdminOrders from '../Components/AdminOrders';
 
 function adminUi() {
+  
+  //variables
   const [isBurgerOpen, setBurgerOpen] = useState(false)
   const [tabSelectedfromChild, setTabSelectedFromChild] = useState();
 
@@ -40,7 +40,15 @@ function adminUi() {
             <div className={tabSelectedfromChild === "adminHome" ? "block " : "hidden" }>
               <AdminHome/>
             </div>
-          
+            <div className={tabSelectedfromChild === "adminItems" ? "block " : "hidden" }>
+              <AdminItems/>
+            </div>
+            <div className={tabSelectedfromChild === "adminAccounts" ? "block " : "hidden" }>
+              <AdminAccounts/>
+            </div>
+            <div className={tabSelectedfromChild === "adminOrders" ? "block " : "hidden" }>
+              <AdminOrders/>
+            </div>
         </div>
         
       </div>

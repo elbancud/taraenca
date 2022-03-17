@@ -65,7 +65,7 @@ function AdminHome() {
                 </div>
             </div>
         </section>
-        <div class="flex flex-col">
+        <div className="flex flex-col">
             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class=" inline-block min-w-full sm:px-6 lg:px-8">
                 <div class="overflow-hidden">
@@ -138,69 +138,9 @@ function AdminHome() {
                 </div>
                 </div>
             </div>
-            </div>
-        {/* <section className='w-full'>
-                        
-            <div class="">
-                <div class="overflow-x-auto  ">
-                    <div class="inline-block  align-middle">
-                        <div class="overflow-hidden ">
-                            <table class="">
-                                <thead class="bg-gray-100 border-b border-b-slate-200 bg-[#f9fafb]">
-                                    <tr>
-                                        <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                            Product Name
-                                        </th>
-                                        <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                            ID
-                                        </th>
-                                        <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                            Category
-                                        </th>
-                                        <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                            Images
-                                        </th>
-                                        <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                            Order
-                                        </th>
-                                        <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                            Price
-                                        </th>
-                                        <th scope="col" class="p-4">
-                                            <span class="sr-only">Edit</span>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="">
-                                    <tr class="border-b border-b-slate-100">
-                                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">Lomi</td>
-                                        <td class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap ">213545345</td>
-                                        <td class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap ">Noodles</td>
-                                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">$1999</td>
-                                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">100</td>
-                                        <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                                            <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                        </td>
-                                    </tr>
-                                    <tr class="border-b border-b-slate-100">
-                                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">Apple Imac 27"</td>
-                                        <td class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap ">213545345</td>
-                                        <td class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap ">Desktop PC</td>
-                                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">$1999</td>
-                                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap ">$1999</td>
-                                        <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                                        <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-               
-        </section> */}
+        </div>
+        
+      
     </div>
   )
 }
