@@ -67,10 +67,10 @@ function AdminHome() {
         </section>
         <div className="flex flex-col">
             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class=" inline-block min-w-full sm:px-6 lg:px-8">
-                <div class="overflow-hidden">
-                    <table class="min-w-full ">
-                        <thead class="bg-gray-100 border-b border-b-slate-200 bg-[#f0f0f0]">
+                <div className="inline-block min-w-full sm:px-6 lg:px-8">
+                <div className="overflow-hidden">
+                    <table className="min-w-full ">
+                        <thead className="bg-gray-100 border-b border-b-slate-200 bg-[#f0f0f0]">
                             <tr className='text-left'>
                                 <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
                                     Product Name

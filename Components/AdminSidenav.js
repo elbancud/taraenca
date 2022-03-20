@@ -11,8 +11,8 @@ function AdminSidenav({ selectedTab }) {
   const [isBurgerOpen, setBurgerOpen] = useState(false)
     
   return (
-    <div className='w-full '>
-         <div className='relative hidden h-screen  md:block bg-[#f3f4f6]'>
+    <div className='w-72'>
+         <div className='fixed  left-0 hidden h-screen  md:block bg-[#f3f4f6]'>
             <div className="relative h-screen w-72 md:flex md:flex-col ">
                 <div className="flex justify-center w-full py-10 cursor-pointer">
                     <Image src={taraenca} alt="logo" />

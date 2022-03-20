@@ -16,7 +16,7 @@ function adminUi() {
   
   //variables
   const [isBurgerOpen, setBurgerOpen] = useState(false)
-  const [tabSelectedfromChild, setTabSelectedFromChild] = useState();
+  const [tabSelectedfromChild, setTabSelectedFromChild] = useState("adminHome");
 
   return (
     <div className=" md:flex">

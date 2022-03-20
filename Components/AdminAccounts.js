@@ -1,5 +1,7 @@
 import React from 'react'
 
+
+
 function AdminAccounts() {
   return (
     <div>
@@ -139,15 +141,7 @@ function AdminAccounts() {
                                           </div>
                                           
   {/* Buttom Register  ============================================================================================ */}
-                                          
-                                          <div className="px-4 py-3 text-right bg-gray-50 sm:px-6">
-                                              <button
-                                                  type="submit"
-                                                  className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                              >
-                                                  Register
-                                              </button>
-                                          </div>
+                                  
                                       </div>
                                   </form>
                               </div>
@@ -202,7 +196,7 @@ function AdminAccounts() {
                                                     </label>
                                                     <p className="pl-1">or drag and drop</p>
                                                   </div>
-                                                  <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                                                  <p className="text-xs text-gray-500">PNG, JPG up to 25MB</p>
                                                 </div>
                                               </div>
                                             </div>
