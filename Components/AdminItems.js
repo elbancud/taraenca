@@ -1,8 +1,14 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect, Fragment} from 'react'
 
 //db input
 import { db } from './Firebase/firebase'
-import { push, ref, onValue, update, remove, getDatabase } from "firebase/database";
+import { push, ref, onValue, update as db_update, remove, getDatabase } from "firebase/database";
+import { getStorage, ref as ref_storage, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
+
+import { Dialog, Transition } from '@headlessui/react'
+
+import { v4 as uuidv4 } from 'uuid';
+
 
 
 function AdminItems() {
@@ -11,8 +17,45 @@ function AdminItems() {
   const [itemName, setItemName] = useState("")
   const [itemDescription, setItemDescription] = useState("")
   const [itemType, setItemType] = useState("")
+  const [itemPrice, setItemPrice] = useState("")
   const [mealCourse, setMealCourse] = useState("")
   const [uploadedFileNames, setUploadedFileNames] = useState([]);
+
+  const storage = getStorage();
+  
+  
+  
+  const [loading, setLoading] = useState(false);
+  const [edit, setEdit] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false)
+  
+  const [currentData, setCurrentData] = useState()
+  
+  
+  {/* ======================================== Fetch ==================================================== */}
+  
+  
+const [update, setUpdate] = useState(false);
+const [itemsArray, setItemsArray] = useState();
+useEffect(() => {
+  
+      const db = getDatabase();
+      const dbRef = ref(db, "items")
+      
+      onValue(dbRef, (snapshot) => {
+        
+        const snap = snapshot.val()
+        const itemsArray = []
+
+        for (let id in snap) {
+          itemsArray.push({id, ...snap[id]})
+        }
+
+        setItemsArray(itemsArray);
+
+        
+      })
+    }, [update])
 
 {/* ======================================== submit ==================================================== */}
   
@@ -21,24 +64,56 @@ function AdminItems() {
     
     //mo refresh
     event.preventDefault();
-
+    setLoading(true);
     //format = push (reference(db, "name of the field"))
+    let id = uuidv4();
+
     const dataSubmit = push(ref(db, "items"), {
         itemName,
         itemDescription,
         itemType,
+        itemPrice,
         mealCourse,
+        key: id,
         
         
-    }).then(() => {
-      
-      setItemName("")
-      setItemDescription("")
-
-      alert("item successfully registered")
     })
+    for (let i in uploadedFileNames) {
+              let id = uuidv4();
+
+                const storageRef = ref_storage(storage, id);
+                                         
+                uploadBytes(storageRef, uploadedFileNames[i]).then((snapshot) => {
+                                             
+                    getDownloadURL(storageRef).then((url) => {
+                                                 
+                        urlNameStorage(url, dataSubmit.key, id)
+                                              
+                                                 
+                    })
+                });
+                                        
+    }
   }
 {/* ======================================== Upload function ==================================================== */}
+function urlNameStorage(url, key,id) {
+        const pushedData = push(ref(db, "items/"+key), {
+                                        url: url,
+                                        imageId: id
+                            }).then(()=> {
+                                
+                                  alert("Item successfuly registered")
+                                  setLoading(false);
+
+                                  formReset()
+                                  setUpdate(!update);
+                                  window.location.reload()
+                                  
+                            })
+                                        
+  }
+    
+{/* ======================================== Upload f unction ==================================================== */}
 
   function readUpload(event) {
 
@@ -54,20 +129,123 @@ function AdminItems() {
   function removeItem(row) {
         const list = uploadedFileNames.filter((items, index) => index !== row)
         setUploadedFileNames(list)
-    }
+  }
+{/* ======================================== Number only==================================================== */}
+
+  
+  function handleChangeNumOnly(event, variable) {
+        const re = /^[0-9\b]+$/;
+        if (event.target.value === '' || re.test(event.target.value)) {
+            variable(event.target.value)
+        }
+  }
+  {/* ======================================== Edit btn ==================================================== */}
+
+  
+  function editItems(data, id) {
+
+          setCurrentData(id)          
+          setItemName(data.itemName)
+          setItemDescription(data.itemDescription)
+          setItemType(data.itemType)
+          setMealCourse(data.mealCourse)
+          setItemPrice(data.itemPrice)
+          
+          setEdit(true);
+  }
+  {/* ======================================== edit Cancel ==================================================== */}
+
+  const editCancel = () => {
+          formReset()
+          setEdit(false);
+          
+  }
+  {/* ======================================== form Reset ==================================================== */}
+
+  const formReset = () => {
+          setItemName("")
+          setItemDescription("")
+          setItemType("")
+          setMealCourse("")
+          setUploadedFileNames([])
+          setItemPrice("")
+  }
+
+  {/* ======================================== opem delete modal function ==================================================== */}
+  const openDeleteModal = (data) => {
+    setCurrentData(data)
+  }
+
+  {/* ======================================== delete data function ==================================================== */}
+  const confirmDelete = () => {
+    const db = getDatabase();
+
+    const currentImageId = "" 
+    const currentId = currentData.id
+    
+    setLoading(true)
+
+    Object.values(currentData).map(data => {
+      if (typeof (data) === "object") {
+        currentImageId = data.imageId
+      }
+    })
+    setDeleteModal(false)
+
+            remove(ref(db, "items/" + currentId)).then(() => {
+                    const storage = getStorage();
+                    const desertRef = ref_storage(storage, currentImageId);
+                    
+                    deleteObject(desertRef).then(()=> {
+                      
+                      setLoading(false)
+                      setCurrentData("")
+                      setUpdate(!update)
+                      alert("Item Deleted")
+                    })
+                })
+    
+
+  }
+   {/* ======================================== Save changes function ==================================================== */}
+  
+  const saveChanges = () => {
+    setLoading(true)
+    db_update(ref(db, "items/" + currentData), {
+        itemName,
+        itemDescription,
+        itemType,
+        itemPrice,
+        mealCourse,
+    }).then(() => {
+      setLoading(false)
+      setUpdate(!update)
+      formReset()
+      setCurrentData("")
+      setEdit(false)
+      alert("Item updated")
+    })
+  }
+
   return (
     
-   <div>
-
+   <div className=''>
+     
+      <div className={!loading? "hidden":""}>
+        <div className='fixed top-0 left-0 z-50 w-full h-full backdrop-blur-sm backdrop-brightness-10 '>
+              
+              <iframe className="fixed transform -translate-x-1/2 -translate-y-1/2 fized left-1/2 top-1/2" src="https://giphy.com/embed/XBXBWRWbSmM6HnjErP" width="280" height="260" frameBorder="0" class="giphy-embed" ><p><a href="https://giphy.com/gifs/beastieboys-beastie-boys-body-movin-XBXBWRWbSmM6HnjErP">Regestering your item...</a></p></iframe>
+        </div>
+      </div>
       
-      <header className='w-full px-8 py-6 border-t border-b border-b-slate-200'>
+      <header className='w-full px-8 py-6 border-t border-b border-b-slate-200 '>
             <div>
               <h2 className='text-xl font-semibold '>Item Registration</h2>
             </div>
       </header>
+     
 
-
-      <section className='w-full px-8 py-6' >
+      <section className='w-full px-8 py-6 ' >
 
   {/* ======================================== Start info ==================================================== */}
 
@@ -121,7 +299,7 @@ function AdminItems() {
                                                     <div class="flex justify-center">
                                                       <div class=" w-full">
                                                         <select required value={itemType} onChange={(event) => {setItemType(event.target.value)}} className="w-full px-4 py-1 m-0 mt-2 font-normal text-gray-700 transition ease-in-out bg-white bg-no-repeat border border-gray-300 border-solid rounded appearance-none form-select form-select-lg bg-clip-padding focus:text-gray-700 focus:bg-white focus:border-orange-900 focus:outline-none" aria-label=".form-select-lg example">
-                                                            <option selected>Open item type</option>
+                                                            <option defaultValue>Open item type</option>
                                                             <option value="1">Beverage</option>
                                                             <option value="2">Noodles</option>
                                                             <option value="4">Steak</option>
@@ -138,8 +316,8 @@ function AdminItems() {
                                                     </label>
                                                     <div class="flex justify-center">
                                                       <div class=" w-full">
-                                                        <select value = {mealCourse} onChange={(event) => {setMealCourse(event.target.value)}} required className="w-full px-4 py-1 m-0 mt-2 font-normal text-gray-700 transition ease-in-out bg-white bg-no-repeat border border-gray-300 border-solid rounded appearance-none form-select form-select-lg bg-clip-padding focus:text-gray-700 focus:bg-white focus:border-orange-900 focus:outline-none" aria-label=".form-select-lg example">
-                                                            <option selected>Open course meals category</option>
+                                                        <select required value = {mealCourse} onChange={(event) => {setMealCourse(event.target.value)}} required className="w-full px-4 py-1 m-0 mt-2 font-normal text-gray-700 transition ease-in-out bg-white bg-no-repeat border border-gray-300 border-solid rounded appearance-none form-select form-select-lg bg-clip-padding focus:text-gray-700 focus:bg-white focus:border-orange-900 focus:outline-none" aria-label=".form-select-lg example">
+                                                            <option defaultValue>Open course meals category</option>
                                                             <option value="1">Appetizer</option>
                                                             <option value="2">Main course</option>
                                                             <option value="3">Salad</option>
@@ -149,7 +327,22 @@ function AdminItems() {
                                                     </div>
                                                   </div>
                                                 </div>
-                                                
+       {/* Item price ==========================================================  */}
+                                                <div className="col-span-6">
+                                                    <label htmlFor="street-address" className="block text-sm font-medium text-gray-700">
+                                                        Price
+                                                    </label>
+                                                    <input
+                                                        value={itemPrice}
+                                                        onChange={(event) => { handleChangeNumOnly(event, setItemPrice) }}
+                                                        type="text"
+                                                        name="itemName"
+                                                        id="item-name"
+                                                        required
+                                                        className="relative block w-full px-3 py-1 mt-2 text-gray-900 placeholder-gray-500 border border-gray-300 appearance-none rounded-b-md rounded-t-md focus:outline-none focus:ring-orange-900 focus:border-orange-900 focus:z-10"
+                                                    />
+                                                </div>
+                                          
   {/* Input Description ============================================================================================ */}
 
                                                 <div className="col-span-6">
@@ -168,8 +361,7 @@ function AdminItems() {
                                                     />
                                                 </div>
  
-                                                
- 
+
   {/* Input Image  ============================================================================================ */}
                                                 <div className="col-span-6">
                                                         <div className="">
@@ -246,16 +438,44 @@ function AdminItems() {
                                             </div>
                                           </div>
                                          
-                                            {/* Button Register Photo  ============================================================================================ */}
-                                                            
-                                                            <div className="px-4 py-3 text-right bg-gray-50 sm:px-6">
-                                                              <button
-                                                                  type="submit"
-                                                                  className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                                              >
-                                                                  Register
-                                                              </button>
-                                                          </div>
+{/* Button Register Photo  ============================================================================================ */}
+                                                            <div className={edit? "hidden": ""}>
+                                                                <div className="px-4 py-3 text-right bg-gray-50 sm:px-6">
+                                                                    <button
+                                                                        type="submit"
+                                                                        className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                                    >
+                                                                        Register
+                                                                    </button>
+                                                                </div>
+                                                              
+                                                            </div>
+                                                          <div className={edit? "": "hidden"}>
+                                                                <div className='flex justify-end px-4 py-3 text-right bg-gray-50 sm:px-6'>
+                                                                    <div className="mx-2">
+                                                                        <button
+                                                                            type='button'
+                                                                            className="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+
+                                                                            onClick={editCancel}
+                                                                        >
+                                                                            Cancel
+                                                                        </button>
+                                                                    </div>
+                                                                    <div className="">
+                                                                        <button
+                                                                            type="button"
+                                                                            className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                                                                            onClick={saveChanges}
+                                                                        >
+                                                                            Save changes
+                                                                        </button>
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                                
+                                                            </div>
+                                                          
                                   
                                       </div>
                                       
@@ -270,6 +490,184 @@ function AdminItems() {
                         </div>
 
       </section>
+
+{/* table for actions ============================================================================================ */}
+
+      <section>
+          <div className="flex flex-col">
+            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div className="inline-block min-w-full sm:px-6 lg:px-8">
+                <div className="overflow-hidden">
+                    <table className="min-w-full ">
+                        <thead className="bg-gray-100 border-b border-b-slate-200 bg-[#f0f0f0]">
+                            <tr className='text-left'>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                    Product Name
+                                </th>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                    ID
+                                </th>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                    Item Category
+                                </th>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                    Meal course
+                                </th>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                    Images
+                                </th>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                    Description
+                                </th>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                    Order
+                                </th>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                    Price
+                                </th>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                    Actions
+                                </th>
+                            </tr>
+                        </thead >
+                        <tbody className='text-left'>
+                            {
+                              itemsArray ? itemsArray.map(data => {
+                                    return(
+                                      <tr class="bg-white border-b " key={data.id}>
+                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                              {data.itemName}
+                                          </td>
+                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                              {data.key}
+                                          </td>
+                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                             { data.itemType}
+                                          </td>
+                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                             { data.mealCourse}
+                                          </td>
+                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                              image
+                                          </td>
+                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                              {data.itemDescription}
+                                          </td>
+                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                              Orders
+                                          </td>
+                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                              {data.itemPrice}
+                                          </td>
+                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                            <div className='flex'>
+                                                    <div className='cursor-pointer rounded-full hover:bg-[#f0f0f0] p-2' onClick={() => { openDeleteModal(data); setDeleteModal(true) }}>
+                                                          <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 " fill="none" viewBox="0 0 24 24" stroke="red" strokeWidth={1}>
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                           </svg>
+                                                    </div>
+                                                    <div className='cursor-pointer rounded-full hover:bg-[#f0f0f0] p-2' onClick={() => { editItems(data, data.id) }}>
+                                                          <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="blue" strokeWidth={1}>
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                          </svg>                  
+                                                    </div>
+                                            </div>   
+                                          
+                                          </td>
+                                      </tr>)
+                                
+                              }) : ""
+                            }
+                        
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
+        </div>                                 
+      </section>
+{/* Modal ============================================================================================ */}
+
+     <Transition appear show={deleteModal} as={Fragment}>
+        <Dialog
+          as="div"
+          className="fixed inset-0 z-10 overflow-y-auto"
+          onClose={()=>{setDeleteModal(false)}}
+        >
+          <div className="min-h-screen px-4 text-center">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Dialog.Overlay className="fixed inset-0 bg-gray-600 bg-opacity-40 backdrop-blur-sm" />
+            </Transition.Child>
+
+                  {/* This element is to trick the browser into centering the modal contents. */}
+                  <span
+                    className="inline-block h-screen align-middle"
+                    aria-hidden="true"
+                  >
+                    &#8203;
+                  </span>
+                  <Transition.Child
+                    as={Fragment}
+                    enter="ease-out duration-300"
+                    enterFrom="opacity-0 scale-95"
+                    enterTo="opacity-100 scale-100"
+                    leave="ease-in duration-200"
+                    leaveFrom="opacity-100 scale-100"
+                    leaveTo="opacity-0 scale-95"
+                  >
+                        <div className="inline-block w-full max-w-lg my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-xl">
+                          <Dialog.Title
+                            as="h3"
+                            className="px-6 pt-6 text-lg font-medium leading-6 text-gray-900"
+                          >
+                            <div className=''>
+                                
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="pink" strokeWidth={2}>
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>  
+                              
+                            </div>
+                            Delete this Item?
+                          </Dialog.Title>
+                          
+                          <div className="px-6 mt-2 ">
+                            <p className="text-sm text-gray-500">
+                                Be mindful that upon confirmation the item will be permanently removed and no where could be retrieved.
+                            </p>
+                          </div>
+
+                          <div className="flex justify-end w-full px-6 py-3 mt-4 bg-gray-50">
+                            <div className="mx-2">
+                                <button
+                                    type='button'
+                                    className="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-200 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                                    onClick={()=> {setDeleteModal(false)}}
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                            <button
+                              type="button"
+                              className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
+                              onClick={confirmDelete}
+                            >
+                              Confirm Delete
+                            </button>
+                          </div>
+                          
+                        </div>
+                  </Transition.Child>
+                </div>
+        </Dialog>
+      </Transition>
     </div>
   )
 }

@@ -12,10 +12,11 @@ import SideNav from '../Components/SideNav'
 import AboutUs from '../Components/AboutUs';
 import AdminLogin from '../Components/AdminLogin';
 import ResetPassword from '../Components/ResetPassword';
+import Order from '../Components/Order';
 
 export default function Home() {
   const [isBurgerOpen, setBurgerOpen] = useState(false)
-  const [tabSelectedfromChild, setTabSelectedFromChild] = useState("admin");
+  const [tabSelectedfromChild, setTabSelectedFromChild] = useState("order");
   
   return (
     <>
@@ -48,6 +49,9 @@ export default function Home() {
             </div>
             <div className={tabSelectedfromChild === "admin" ? "block " : "hidden" }>
               <AdminLogin setForgotPassword={(tabName)=>{setTabSelectedFromChild(tabName)}}/>
+            </div>
+            <div className={tabSelectedfromChild === "order" ? "block " : "hidden" }>
+              <Order setForgotPassword={(tabName)=>{setTabSelectedFromChild(tabName)}}/>
             </div>
             <div className={tabSelectedfromChild === "resetPass" ? "block " : "hidden" }>
               <ResetPassword/>

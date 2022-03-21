@@ -1,6 +1,31 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import { db } from './Firebase/firebase'
+import { push, ref, onValue, update as db_update, remove, getDatabase } from "firebase/database";
 
 function AdminHome() {
+
+const [update, setUpdate] = useState(false);
+const [itemsArray, setItemsArray] = useState();
+    
+useEffect(() => {
+  
+      const db = getDatabase();
+      const dbRef = ref(db, "items")
+      
+      onValue(dbRef, (snapshot) => {
+        
+        const snap = snapshot.val()
+        const itemsArray = []
+
+        for (let id in snap) {
+          itemsArray.push({id, ...snap[id]})
+        }
+
+        setItemsArray(itemsArray);
+
+        
+      })
+    }, [update])
 
   return (
     <div className='h-screen border-l border-b-slate-100'>
@@ -65,7 +90,8 @@ function AdminHome() {
                 </div>
             </div>
         </section>
-        <div className="flex flex-col">
+<section>
+          <div className="flex flex-col">
             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="inline-block min-w-full sm:px-6 lg:px-8">
                 <div className="overflow-hidden">
@@ -79,10 +105,16 @@ function AdminHome() {
                                     ID
                                 </th>
                                 <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
-                                    Category
+                                    Item Category
+                                </th>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                    Meal course
                                 </th>
                                 <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
                                     Images
+                                </th>
+                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                    Description
                                 </th>
                                 <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
                                     Order
@@ -90,56 +122,51 @@ function AdminHome() {
                                 <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
                                     Price
                                 </th>
+                          
                             </tr>
                         </thead >
                         <tbody className='text-left'>
-                            <tr class="bg-white border-b ">
-                                <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
-                                    Lomi
-                                </td>
-                                <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
-                                    21332131
-                                </td>
-                                <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
-                                    Noodles
-                                </td>
-                                <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
-                                    wewew
-                                </td>
-                                <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
-                                    123
-                                </td>
-                                <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
-                                    120php
-                                </td>
-                            </tr>
-                            <tr class="bg-white border-b ">
-                                <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
-                                    Lomi
-                                </td>
-                                <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
-                                    21332131
-                                </td>
-                                <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
-                                    Noodles
-                                </td>
-                                <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
-                                    wewew
-                                </td>
-                                <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
-                                    123
-                                </td>
-                                <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
-                                    120php
-                                </td>
-                            </tr>
+                            {
+                              itemsArray ? itemsArray.map(data => {
+                                    return(
+                                      <tr class="bg-white border-b " key={data.id}>
+                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                              {data.itemName}
+                                          </td>
+                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                              {data.key}
+                                          </td>
+                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                             { data.itemType}
+                                          </td>
+                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                             { data.mealCourse}
+                                          </td>
+                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                              image
+                                          </td>
+                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                              {data.itemDescription}
+                                          </td>
+                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                              Orders
+                                          </td>
+                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                              {data.itemPrice}
+                                          </td>
+                                     
+                                      </tr>)
+                                
+                              }) : ""
+                            }
+                        
                         </tbody>
                     </table>
                 </div>
                 </div>
             </div>
-        </div>
-        
+        </div>                                 
+      </section>
       
     </div>
   )
