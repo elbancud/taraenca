@@ -102,7 +102,6 @@ function urlNameStorage(url, key,id) {
                                         imageId: id
                             }).then(()=> {
                                 
-                                  alert("Item successfuly registered")
                                   setLoading(false);
 
                                   formReset()
@@ -197,11 +196,11 @@ function urlNameStorage(url, key,id) {
                     const desertRef = ref_storage(storage, currentImageId);
                     
                     deleteObject(desertRef).then(()=> {
-                      
-                      setLoading(false)
+                      setTimeout(() => {
+                          setLoading(false)
+                      }, 1000)
                       setCurrentData("")
                       setUpdate(!update)
-                      alert("Item Deleted")
                     })
                 })
     
@@ -218,12 +217,13 @@ function urlNameStorage(url, key,id) {
         itemPrice,
         mealCourse,
     }).then(() => {
-      setLoading(false)
+                    setTimeout(() => {
+                          setLoading(false)
+                      }, 1000)
       setUpdate(!update)
       formReset()
       setCurrentData("")
       setEdit(false)
-      alert("Item updated")
     })
   }
 
@@ -232,9 +232,12 @@ function urlNameStorage(url, key,id) {
    <div className=''>
      
       <div className={!loading? "hidden":""}>
-        <div className='fixed top-0 left-0 z-50 w-full h-full backdrop-blur-sm backdrop-brightness-10 '>
+        <div className='fixed top-0 left-0 z-50 flex items-center justify-center w-full h-full backdrop-blur-sm backdrop-brightness-10 '>
+              <div className=''>
+                  <iframe className="" src="https://giphy.com/embed/XBXBWRWbSmM6HnjErP" width="280" height="260" frameBorder="0" class="giphy-embed" ><p><a href="https://giphy.com/gifs/beastieboys-beastie-boys-body-movin-XBXBWRWbSmM6HnjErP">Regestering your item...</a></p></iframe>
+                
+              </div>
               
-              <iframe className="fixed transform -translate-x-1/2 -translate-y-1/2 fized left-1/2 top-1/2" src="https://giphy.com/embed/XBXBWRWbSmM6HnjErP" width="280" height="260" frameBorder="0" class="giphy-embed" ><p><a href="https://giphy.com/gifs/beastieboys-beastie-boys-body-movin-XBXBWRWbSmM6HnjErP">Regestering your item...</a></p></iframe>
         </div>
       </div>
       
@@ -266,15 +269,15 @@ function urlNameStorage(url, key,id) {
                                                   </div>
                                               </div>
                                               <div className='col-span-6 w-full bg-[#fff4e5]  flex p-3  text-[#663C00] items-center text-sm'>
-                                              <div className='mr-3'> 
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="#ffa117" strokeWidth={2}>
-                                                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                                                </svg>
+                                                  <div className='mr-3'> 
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="#ffa117" strokeWidth={2}>
+                                                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                                    </svg>
+                                                  </div>
+                                                  <div>
+                                                    Complete every fields plzz ty 
+                                                  </div>
                                               </div>
-                                              <div>
-                                                Complete every fields plzz ty 
-                                              </div>
-                                            </div>
  {/* Item name ==========================================================  */}
                                                 <div className="col-span-6">
                                                     <label htmlFor="street-address" className="block text-sm font-medium text-gray-700">
@@ -300,9 +303,9 @@ function urlNameStorage(url, key,id) {
                                                       <div class=" w-full">
                                                         <select required value={itemType} onChange={(event) => {setItemType(event.target.value)}} className="w-full px-4 py-1 m-0 mt-2 font-normal text-gray-700 transition ease-in-out bg-white bg-no-repeat border border-gray-300 border-solid rounded appearance-none form-select form-select-lg bg-clip-padding focus:text-gray-700 focus:bg-white focus:border-orange-900 focus:outline-none" aria-label=".form-select-lg example">
                                                             <option defaultValue>Open item type</option>
-                                                            <option value="1">Beverage</option>
-                                                            <option value="2">Noodles</option>
-                                                            <option value="4">Steak</option>
+                                                            <option value="Beverage">Beverage</option>
+                                                            <option value="Noodles">Noodles</option>
+                                                            <option value="Steak">Steak</option>
                                                             
                                                         </select>
                                                     </div>
@@ -318,9 +321,9 @@ function urlNameStorage(url, key,id) {
                                                       <div class=" w-full">
                                                         <select required value = {mealCourse} onChange={(event) => {setMealCourse(event.target.value)}} required className="w-full px-4 py-1 m-0 mt-2 font-normal text-gray-700 transition ease-in-out bg-white bg-no-repeat border border-gray-300 border-solid rounded appearance-none form-select form-select-lg bg-clip-padding focus:text-gray-700 focus:bg-white focus:border-orange-900 focus:outline-none" aria-label=".form-select-lg example">
                                                             <option defaultValue>Open course meals category</option>
-                                                            <option value="1">Appetizer</option>
-                                                            <option value="2">Main course</option>
-                                                            <option value="3">Salad</option>
+                                                            <option value="Appetizer">Appetizer</option>
+                                                            <option value="Main course">Main course</option>
+                                                            <option value="Salad">Salad</option>
                                                             
                                                             
                                                         </select>

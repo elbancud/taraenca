@@ -11,6 +11,7 @@ import AdminItems from '../Components/AdminItems';
 import AdminAccounts from '../Components/AdminAccounts';
 import taraenca from '../pages/Assets/taraenca.png'
 import AdminOrders from '../Components/AdminOrders';
+import AdminSeatPlan from '../Components/AdminSeatPlan';
 
 function adminUi() {
   
@@ -48,6 +49,9 @@ function adminUi() {
             </div>
             <div className={tabSelectedfromChild === "adminOrders" ? "block " : "hidden" }>
               <AdminOrders/>
+            </div>
+            <div className={tabSelectedfromChild === "adminSeat" ? "block " : "hidden" }>
+              <AdminSeatPlan/>
             </div>
         </div>
         

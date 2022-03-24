@@ -43,21 +43,23 @@ export default function Home() {
           </div>
         </div>
         
-        <div className='container w-full max-w-4xl px-4 m-auto'>
+        <div className='w-full px-4'>
             <div className={tabSelectedfromChild === "about" ? "block " : "hidden" }>
               <AboutUs/>
             </div>
             <div className={tabSelectedfromChild === "admin" ? "block " : "hidden" }>
               <AdminLogin setForgotPassword={(tabName)=>{setTabSelectedFromChild(tabName)}}/>
             </div>
-            <div className={tabSelectedfromChild === "order" ? "block " : "hidden" }>
-              <Order setForgotPassword={(tabName)=>{setTabSelectedFromChild(tabName)}}/>
-            </div>
+            
             <div className={tabSelectedfromChild === "resetPass" ? "block " : "hidden" }>
               <ResetPassword/>
             </div>
+            <div className='w-full'>
+                <div className={tabSelectedfromChild === "order" ? "block " : "hidden" }>
+                      <Order setForgotPassword={(tabName)=>{setTabSelectedFromChild(tabName)}}/>
+                    </div>
+            </div>
         </div>
-        
       </div>
     </>
     

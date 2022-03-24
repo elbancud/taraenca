@@ -32,17 +32,25 @@ useEffect(() => {
     }, [update])
 
   return (
-      <div className='h-screen '>
-        <div className='flex'>
+    <div className='w-full h-screen pt-10'>
+        <div className='flex flex-wrap justify-center py-5'>
                 {
-                    itemsArray ? itemsArray.map(data => {
-                        return (
-                            <div className='relative max-w-md overflow-hidden bg-[green] m-2'>
-                        
-                                <Image  width={"450"} height = {"400"} src={Object.values(data)[1].url} alt="logo" />
-
-                            </div>
-                        )
+                    itemsArray ? itemsArray.map((data, element) => {
+                    
+                          return (
+                                      
+                                  <div key={data.key} className='cursor-pointer hover:shadow-2xl mb-5 sm:mr-5 relative w-96 pt-12  overflow-hidden text-center h-96 bg-[#f7f7f7]'>
+                                          <div className='px-7'>
+                                            <h1 className='mb-2 text-2xl font-bold'>{data.itemName}</h1>
+                                            
+                                          </div>
+                                          <h1 className='mb-2 text-xl font-semibold'>{data.itemType} / {data.mealCourse}</h1>
+                                          <h1 className='mb-2 text-xl text-[#af4242]'>₱{data.itemPrice}</h1>
+                                          
+                                          <img  className="absolute " src={Object.values(data)[1].url} alt="logo" />
+                                  </div>
+                            )
+                          
                             
                         }) : ""
                 }

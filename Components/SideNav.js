@@ -11,9 +11,9 @@ import Image from 'next/image'
 function sideNav({selectedTab}) {
     
   return (
-    <div>
-         <div className='relative hidden h-screen overflow-hidden md:block bg-[#50382F]'>
-            <div className="relative h-screen px-4 py-10 w-96 md:flex md:flex-col md:justify-between">
+    <div className='relative hidden w-96 md:block '>
+         <div className='fixed  h-screen overflow-hidden bg-[#50382F]'>
+            <div className="h-screen px-4 py-10 w-96 md:flex md:flex-col md:justify-between">
                 <div className="flex justify-center w-full cursor-pointer">
                     <Image src={taraenca} alt="logo" />
                 </div>
