@@ -40,9 +40,9 @@ useEffect(() => {
                           return (
                                   <Link href={"order/"+data.key} key={data.key}>
                                     
-                                      <div  className='cursor-pointer hover:shadow-2xl mb-5 sm:mr-5 relative w-96 pt-12  overflow-hidden text-center h-96 bg-[#fafafa]'>
-                                                  <div className='max-w-md  px-7'>
-                                                    <h1 className='text-2xl font-bold  b-2'>{data.itemName}</h1>
+                                    <div  className='cursor-pointer hover:shadow-2xl mb-5 sm:mr-5 relative w-96 pt-12  overflow-hidden text-center h-96 bg-[#fafafa]'>
+                                                  <div className='px-7'>
+                                                    <h1 className='mb-2 text-2xl font-bold'>{data.itemName}</h1>
                                                     
                                                   </div>
                                                   <h1 className='mb-2 text-xl font-semibold'>{data.itemType} / {data.mealCourse}</h1>
