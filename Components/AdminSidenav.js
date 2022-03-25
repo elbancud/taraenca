@@ -115,7 +115,7 @@ function AdminSidenav({ selectedTab }) {
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M5 11l7-7 7 7M5 19l7-7 7 7" />
                                     </svg>
                                 </div>
-                                <div className={dropdown? "": "hidden"} >
+                                <div className={dropdown? "focus:bg-[white]": "hidden"} >
                                     <div  className='z-50 overflow-hidden absolute bottom-10 w-9/12 right-5 rounded-md bg-[white] shadow-lg font-semibold text-gray-500'>
                                         <ul >
                                             <li className='py-2 px-5 hover:bg-[#dfdfdf]'>Account</li>

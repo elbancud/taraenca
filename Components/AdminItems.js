@@ -2,7 +2,7 @@ import React, { useState, useEffect, Fragment} from 'react'
 
 //db input
 import { db } from './Firebase/firebase'
-import { push, ref, onValue, update as db_update, remove, getDatabase } from "firebase/database";
+import { push, ref, onValue, update as db_update , remove, getDatabase} from "firebase/database";
 import { getStorage, ref as ref_storage, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 
 import { Dialog, Transition } from '@headlessui/react'
@@ -74,10 +74,8 @@ useEffect(() => {
         itemType,
         itemPrice,
         mealCourse,
-        key: id,
-        
-        
     })
+    
     for (let i in uploadedFileNames) {
               let id = uuidv4();
 
@@ -97,11 +95,14 @@ useEffect(() => {
   }
 {/* ======================================== Upload function ==================================================== */}
 function urlNameStorage(url, key,id) {
+        db_update(ref(db,"items/" + key), {
+            key
+        })
         const pushedData = push(ref(db, "items/"+key), {
                                         url: url,
                                         imageId: id
                             }).then(()=> {
-                                
+                                 
                                   setLoading(false);
 
                                   formReset()
@@ -553,7 +554,7 @@ function urlNameStorage(url, key,id) {
                                           <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
                                               image
                                           </td>
-                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap max-w-xs overflow-hidden">
                                               {data.itemDescription}
                                           </td>
                                           <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
