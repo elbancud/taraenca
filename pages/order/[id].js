@@ -157,7 +157,7 @@ function FoodSpecific() {
             <div className={!loading? "hidden":""}>
                 <div className='fixed top-0 left-0 z-50 flex items-center justify-center w-full h-full backdrop-blur-sm backdrop-brightness-10 '>
                     <div className=''>
-                        <iframe className="" src="https://giphy.com/embed/XBXBWRWbSmM6HnjErP" width="280" height="260" frameBorder="0" className="giphy-embed" ><p><a href="https://giphy.com/gifs/beastieboys-beastie-boys-body-movin-XBXBWRWbSmM6HnjErP">Regestering your item...</a></p></iframe>
+                        <iframe  src="https://giphy.com/embed/XBXBWRWbSmM6HnjErP" width="280" height="260" frameBorder="0" className="giphy-embed" ><p><a href="https://giphy.com/gifs/beastieboys-beastie-boys-body-movin-XBXBWRWbSmM6HnjErP">Regestering your item...</a></p></iframe>
                         
                     </div>
                     
@@ -246,7 +246,7 @@ function FoodSpecific() {
                                     </div>
                                 </div>
                                 <div className='max-w-2xl px-5 pt-10'>
-                                    <img className="" src={Object.values(data)[0].url} alt="logo" />
+                                    <img className="" src={Object.values(data)[0].url} alt={data.itemName} />
                                 </div>
                             </div>
 
