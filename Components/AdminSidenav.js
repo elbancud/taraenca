@@ -26,7 +26,7 @@ function AdminSidenav({ selectedTab }) {
         <div className={!loading? "hidden":""}>
             <div className='fixed top-0 left-0 z-50 flex items-center justify-center w-full h-full backdrop-blur-sm backdrop-brightness-10 '>
                 <div className=''>
-                    <iframe className="" src="https://giphy.com/embed/Ru9sjtZ09XOEg" width="330" height="310" frameBorder="0" class="giphy-embed" ><p><a href="https://giphy.com/gifs/wwe-peace-out-seth-rollins-Ru9sjtZ09XOEg"></a></p></iframe>
+                    <iframe className="" src="https://giphy.com/embed/Ru9sjtZ09XOEg" width="330" height="310" frameBorder="0" className="giphy-embed" ><p><a href="https://giphy.com/gifs/wwe-peace-out-seth-rollins-Ru9sjtZ09XOEg"></a></p></iframe>
                 </div>
                 
             </div>

@@ -235,7 +235,7 @@ function urlNameStorage(url, key,id) {
       <div className={!loading? "hidden":""}>
         <div className='fixed top-0 left-0 z-50 flex items-center justify-center w-full h-full backdrop-blur-sm backdrop-brightness-10 '>
               <div className=''>
-                  <iframe className="" src="https://giphy.com/embed/XBXBWRWbSmM6HnjErP" width="280" height="260" frameBorder="0" class="giphy-embed" ><p><a href="https://giphy.com/gifs/beastieboys-beastie-boys-body-movin-XBXBWRWbSmM6HnjErP">Regestering your item...</a></p></iframe>
+                  <iframe className="" src="https://giphy.com/embed/XBXBWRWbSmM6HnjErP" width="280" height="260" frameBorder="0" className="giphy-embed" ><p><a href="https://giphy.com/gifs/beastieboys-beastie-boys-body-movin-XBXBWRWbSmM6HnjErP">Regestering your item...</a></p></iframe>
                 
               </div>
               
@@ -300,8 +300,8 @@ function urlNameStorage(url, key,id) {
                                                     <label htmlFor="street-address" className="block text-sm font-medium text-gray-700">
                                                         Item Category
                                                     </label>
-                                                    <div class="flex justify-center">
-                                                      <div class=" w-full">
+                                                    <div className="flex justify-center">
+                                                      <div className="w-full ">
                                                         <select required value={itemType} onChange={(event) => {setItemType(event.target.value)}} className="w-full px-4 py-1 m-0 mt-2 font-normal text-gray-700 transition ease-in-out bg-white bg-no-repeat border border-gray-300 border-solid rounded appearance-none form-select form-select-lg bg-clip-padding focus:text-gray-700 focus:bg-white focus:border-orange-900 focus:outline-none" aria-label=".form-select-lg example">
                                                             <option defaultValue>Open item type</option>
                                                             <option value="Beverage">Beverage</option>
@@ -318,8 +318,8 @@ function urlNameStorage(url, key,id) {
                                                     <label htmlFor="street-address" className="block text-sm font-medium text-gray-700">
                                                         Meal Course Category
                                                     </label>
-                                                    <div class="flex justify-center">
-                                                      <div class=" w-full">
+                                                    <div className="flex justify-center">
+                                                      <div className="w-full ">
                                                         <select required value = {mealCourse} onChange={(event) => {setMealCourse(event.target.value)}} required className="w-full px-4 py-1 m-0 mt-2 font-normal text-gray-700 transition ease-in-out bg-white bg-no-repeat border border-gray-300 border-solid rounded appearance-none form-select form-select-lg bg-clip-padding focus:text-gray-700 focus:bg-white focus:border-orange-900 focus:outline-none" aria-label=".form-select-lg example">
                                                             <option defaultValue>Open course meals category</option>
                                                             <option value="Appetizer">Appetizer</option>
@@ -499,37 +499,37 @@ function urlNameStorage(url, key,id) {
 
       <section>
           <div className="flex flex-col">
-            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="inline-block min-w-full sm:px-6 lg:px-8">
                 <div className="overflow-hidden">
                     <table className="min-w-full ">
                         <thead className="bg-gray-100 border-b border-b-slate-200 bg-[#f0f0f0]">
                             <tr className='text-left'>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                <th scope="col" className="px-6 py-3 text-sm font-medium text-gray-900">
                                     Product Name
                                 </th>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                <th scope="col" className="px-6 py-3 text-sm font-medium text-gray-900">
                                     ID
                                 </th>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                <th scope="col" className="px-6 py-3 text-sm font-medium text-gray-900">
                                     Item Category
                                 </th>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                <th scope="col" className="px-6 py-3 text-sm font-medium text-gray-900">
                                     Meal course
                                 </th>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                <th scope="col" className="px-6 py-3 text-sm font-medium text-gray-900">
                                     Images
                                 </th>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                <th scope="col" className="px-6 py-3 text-sm font-medium text-gray-900">
                                     Description
                                 </th>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                <th scope="col" className="px-6 py-3 text-sm font-medium text-gray-900">
                                     Order
                                 </th>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                <th scope="col" className="px-6 py-3 text-sm font-medium text-gray-900">
                                     Price
                                 </th>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                <th scope="col" className="px-6 py-3 text-sm font-medium text-gray-900">
                                     Actions
                                 </th>
                             </tr>
@@ -538,32 +538,32 @@ function urlNameStorage(url, key,id) {
                             {
                               itemsArray ? itemsArray.map(data => {
                                     return(
-                                      <tr class="bg-white border-b " key={data.id}>
-                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                      <tr className="bg-white border-b " key={data.id}>
+                                          <td className="px-6 py-3 text-sm font-light text-gray-900 whitespace-nowrap">
                                               {data.itemName}
                                           </td>
-                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                          <td className="px-6 py-3 text-sm font-light text-gray-900 whitespace-nowrap">
                                               {data.key}
                                           </td>
-                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                          <td className="px-6 py-3 text-sm font-light text-gray-900 whitespace-nowrap">
                                              { data.itemType}
                                           </td>
-                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                          <td className="px-6 py-3 text-sm font-light text-gray-900 whitespace-nowrap">
                                              { data.mealCourse}
                                           </td>
-                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                          <td className="px-6 py-3 text-sm font-light text-gray-900 whitespace-nowrap">
                                               image
                                           </td>
-                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap max-w-xs overflow-hidden">
+                                          <td className="max-w-xs px-6 py-3 overflow-hidden text-sm font-light text-gray-900 whitespace-nowrap">
                                               {data.itemDescription}
                                           </td>
-                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                          <td className="px-6 py-3 text-sm font-light text-gray-900 whitespace-nowrap">
                                               Orders
                                           </td>
-                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                          <td className="px-6 py-3 text-sm font-light text-gray-900 whitespace-nowrap">
                                               {data.itemPrice}
                                           </td>
-                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                          <td className="px-6 py-3 text-sm font-light text-gray-900 whitespace-nowrap">
                                             <div className='flex'>
                                                     <div className='cursor-pointer rounded-full hover:bg-[#f0f0f0] p-2' onClick={() => { openDeleteModal(data); setDeleteModal(true) }}>
                                                           <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 " fill="none" viewBox="0 0 24 24" stroke="red" strokeWidth={1}>
