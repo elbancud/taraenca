@@ -164,14 +164,12 @@ function FoodSpecific() {
                 </div>
             </div>
             <div className='w-full h-screen px-10 pt-20'>
-                <header c>
-
-                </header>
+                
                 {
                     itemsArray ? Object.values(itemsArray).map((data, element) => {
 
                         return (
-                            <div className='flex flex-wrap items-center justify-center'>
+                            <div className='flex flex-wrap items-center justify-center' key={data.key}>
 
                                 <div >
                                     <h1 className='mb-2 font-semibold text-md'>{data.itemType} / {data.mealCourse}</h1>

@@ -112,7 +112,7 @@ function AdminSeatPlan() {
       <div>
           <div className={!loading? "hidden":""}>
                 <div className='fixed top-0 left-0 z-50 flex items-center justify-center w-full h-full backdrop-blur-sm backdrop-brightness-10'>
-                        <iframe className="" src="https://giphy.com/embed/cjhBClBwZAHs3TEzDH" width="280" height="260" frameBorder="0" class="giphy-embed" ><p><a href="https://giphy.com/gifs/playstation-wait-question-johnny-cage-cjhBClBwZAHs3TEzDH">Regestering your item...</a></p></iframe>
+                        <iframe className="" src="https://giphy.com/embed/cjhBClBwZAHs3TEzDH" width="280" height="260" frameBorder="0" className="giphy-embed" ><p><a href="https://giphy.com/gifs/playstation-wait-question-johnny-cage-cjhBClBwZAHs3TEzDH">Regestering your item...</a></p></iframe>
                 </div>
             </div>
           <header className='w-full px-8 py-6 border-t border-b border-b-slate-200'>

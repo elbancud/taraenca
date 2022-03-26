@@ -92,34 +92,34 @@ useEffect(() => {
         </section>
 <section>
           <div className="flex flex-col">
-            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="inline-block min-w-full sm:px-6 lg:px-8">
                 <div className="overflow-hidden">
                     <table className="min-w-full ">
                         <thead className="bg-gray-100 border-b border-b-slate-200 bg-[#f0f0f0]">
                             <tr className='text-left'>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                <th scope="col" className="px-6 py-3 text-sm font-medium text-gray-900">
                                     Product Name
                                 </th>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                <th scope="col" className="px-6 py-3 text-sm font-medium text-gray-900">
                                     ID
                                 </th>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                <th scope="col" className="px-6 py-3 text-sm font-medium text-gray-900">
                                     Item Category
                                 </th>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                <th scope="col" className="px-6 py-3 text-sm font-medium text-gray-900">
                                     Meal course
                                 </th>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                <th scope="col" clasName="text-sm font-medium text-gray-900 px-6 py-3">
                                     Images
                                 </th>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                <th scope="col" className="px-6 py-3 text-sm font-medium text-gray-900">
                                     Description
                                 </th>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                <th scope="col" className="px-6 py-3 text-sm font-medium text-gray-900">
                                     Order
                                 </th>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-3">
+                                <th scope="col" className="px-6 py-3 text-sm font-medium text-gray-900">
                                     Price
                                 </th>
                           
@@ -129,29 +129,29 @@ useEffect(() => {
                             {
                               itemsArray ? itemsArray.map(data => {
                                     return(
-                                      <tr class="bg-white border-b " key={data.id}>
-                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                      <tr className="bg-white border-b " key={data.id}>
+                                          <td className="px-6 py-3 text-sm font-light text-gray-900 whitespace-nowrap">
                                               {data.itemName}
                                           </td>
-                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                          <td className="px-6 py-3 text-sm font-light text-gray-900 whitespace-nowrap">
                                               {data.key}
                                           </td>
-                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                          <td className="px-6 py-3 text-sm font-light text-gray-900 whitespace-nowrap">
                                              { data.itemType}
                                           </td>
-                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                          <td className="px-6 py-3 text-sm font-light text-gray-900 whitespace-nowrap">
                                              { data.mealCourse}
                                           </td>
-                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                          <td className="px-6 py-3 text-sm font-light text-gray-900 whitespace-nowrap">
                                               image
                                           </td>
-                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                          <td className="px-6 py-3 text-sm font-light text-gray-900 whitespace-nowrap">
                                               {data.itemDescription}
                                           </td>
-                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                          <td className="px-6 py-3 text-sm font-light text-gray-900 whitespace-nowrap">
                                               Orders
                                           </td>
-                                          <td class="text-sm text-gray-900 font-light px-6  py-3 whitespace-nowrap">
+                                          <td className="px-6 py-3 text-sm font-light text-gray-900 whitespace-nowrap">
                                               {data.itemPrice}
                                           </td>
                                      
