@@ -13,7 +13,7 @@ import taraenca from '../pages/Assets/taraenca.png'
 import AdminOrders from '../Components/AdminOrders';
 import AdminSeatPlan from '../Components/AdminSeatPlan';
 
-function adminUi() {
+function AdminUi() {
   
   //variables
   const [isBurgerOpen, setBurgerOpen] = useState(false)
@@ -59,4 +59,4 @@ function adminUi() {
   )
 }
 
-export default adminUi
+export default AdminUi
