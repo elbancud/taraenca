@@ -58,13 +58,16 @@ function AdminSeatPlan() {
                     rowNumberCounter--
                 }
                     group--
-                }
+        }
+
+
         setSeatColumn([])
-        
         setUpdate(!update)
         setGroupNumber(0)
         setColumnNumber(0)
         setRowNumber(0)
+        
+       
     }
 {/* Use Effect function ==========================================================  */}
 
@@ -75,7 +78,8 @@ function AdminSeatPlan() {
                 setLoading(false)
             }, 1000)
         })
-      
+        
+     
         setUpdate(!update)
         setDeleteModal(false)
         

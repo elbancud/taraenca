@@ -13,6 +13,7 @@ import AboutUs from '../Components/AboutUs';
 import AdminLogin from '../Components/AdminLogin';
 import ResetPassword from '../Components/ResetPassword';
 import Order from '../Components/Order';
+import HeaderCart from '../Components/HeaderCart';
 
 export default function Home() {
   const [isBurgerOpen, setBurgerOpen] = useState(false)
@@ -43,7 +44,10 @@ export default function Home() {
           </div>
         </div>
         
-        <div className='w-full px-4'>
+        <div className='w-full '>
+            <div>
+                <HeaderCart/>
+            </div>
             <div className={tabSelectedfromChild === "about" ? "block " : "hidden" }>
               <AboutUs/>
             </div>

@@ -22,7 +22,7 @@ function AdminSidenav({ selectedTab }) {
       }, 1000)
   }
   return (
-      <div className='w-72'  >
+      <div className='w-72 ' >
         <div className={!loading? "hidden":""}>
             <div className='fixed top-0 left-0 z-50 flex items-center justify-center w-full h-full backdrop-blur-sm backdrop-brightness-10 '>
                 <div className=''>

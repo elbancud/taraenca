@@ -16,7 +16,7 @@ function AdminLogin({ setForgotPassword }) {
     const passwordInput = event.target.password.value
 
     if (emailInput === "admin@taraenca.com" && passwordInput === "admin") {
-      router.push("/adminUi")
+      router.push("/AdminUi")
     } else {
       alert("Invalid account")
 

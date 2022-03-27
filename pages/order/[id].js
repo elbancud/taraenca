@@ -11,6 +11,7 @@ import Image from 'next/image'
 
 
 import { signInWithPopup } from 'firebase/auth';
+import HeaderCart from '../../Components/HeaderCart';
 
 function FoodSpecific() {
 
@@ -27,6 +28,8 @@ function FoodSpecific() {
 
     const [modalEnable, setModalEnable] = useState(false)
     const [currentMealKey, setCurrentMealKey] = useState("")
+    const [currentMealName, setCurrentMealName] = useState("")
+
     const [currentImageUrl, setCurrentImageUrl ] = useState("")
     
     const [loading, setLoading] = useState(false);
@@ -37,11 +40,12 @@ function FoodSpecific() {
 
     //  add to caart ================================================================================================
 
-    function handleAddToCart(mealKey,imageUrl, price) {
+    function handleAddToCart(mealKey,imageUrl, price, itemName) {
 
         setCurrentMealKey(mealKey)  
         setCurrentImageUrl(imageUrl)
         setItemPrice(price)
+        setCurrentMealName(itemName)
 
         const currentUser = localStorage.getItem("currentUser")
 
@@ -52,6 +56,7 @@ function FoodSpecific() {
                 size,
                 mealKey,
                 price,
+                itemName,
                 imageUrl
             }).then(() => {
                     setTimeout(() => {
@@ -90,6 +95,7 @@ function FoodSpecific() {
                                 mealKey:currentMealKey,
                                 imageUrl: currentImageUrl,
                                 price:itemPrice,
+                                itemName: currentMealName
                             })
                         setLoading(false)
                     }, 2000)
@@ -153,7 +159,8 @@ function FoodSpecific() {
         }
     }
     return (
-        <div>
+        <div className=''>
+            <HeaderCart/>
             <div className={!loading? "hidden":""}>
                 <div className='fixed top-0 left-0 z-50 flex items-center justify-center w-full h-full backdrop-blur-sm backdrop-brightness-10 '>
                     <div className=''>
@@ -239,7 +246,7 @@ function FoodSpecific() {
                                         </div>
                                         <div className={size && quantity > 0? "block" : "hidden"}>
                                             <div className='py-5'>
-                                                <button onClick={() => { handleAddToCart(data.key, Object.values(data)[0].url, data.itemPrice)}} className='w-full px-4 py-2 mt-3 text-base font-medium text-gray-50 border border-gray-300 rounded-md shadow-sm cursor-pointer hover:bg-gray-900 bg-gray-800 focus:text-[white]'>Add to cart</button>
+                                                <button onClick={() => { handleAddToCart(data.key, Object.values(data)[0].url, data.itemPrice, data.itemName) }} className='w-full px-4 py-2 mt-3 text-base font-medium text-gray-50 border border-gray-300 rounded-md shadow-sm cursor-pointer hover:bg-gray-900 bg-gray-800 focus:text-[white]'>Add to cart</button>
                                             </div>
 
                                         </div>
