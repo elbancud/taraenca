@@ -41,7 +41,7 @@ function Cart() {
     const [seatArray, setSeatArray] = useState();
     const [pax, setPax] = useState();
 
-    const [completed, setCompleted] = useState(true);
+    const [completed, setCompleted] = useState(false);
     const [update, setUpdate] = useState(false);
     const [newData, setNewData] = useState();
 
@@ -72,21 +72,24 @@ function Cart() {
         const dbRefNew = ref(db, "userAccounts/" + localStorage.getItem("accountKey") );
         
         onValue(dbRefNew, (snapshot) => {
-
             const snap = snapshot.val()
-            const newData = []
-            
-            for (let id in snap) {
-                newData.push({ id, ...snap[id] })
-            }
-            setNewData(newData)
+            if(snap.pax) {
+                const newData = []
+                newData.push(snap)
+                
+                // for (let id in snap) {
+                //     newData.push({ id, ...snap[id] })
+                // }
+                setNewData(newData)
+                setCompleted(true)
+            } 
         })
     
     }, [update])
     const [dbSeat, setDbSeat] = useState("");
 
     function reserveSeat(group, rowTitle, colSeat, parentIndex, parent, row, col) {
-
+        
         const parentId = seatArray[parentIndex].id;
         const rowId = Object.keys(seatArray[parentIndex])[row]
         const dbSeat = parentId + "/" + rowId + "/" + col
@@ -105,7 +108,8 @@ function Cart() {
                 qrLink,
                 seat,
                 pax,
-                selectedHour
+                selectedHour,
+                total
             })
             setTimeout(() => {
                 setLoading(false)
@@ -376,7 +380,7 @@ function Cart() {
                                         placeholder="How many are you coming?"
                                     />
                                 </div>
-                                <div className='mt-5'>
+                                <div className={pax && selectedHour ? "block mt-5": "hidden"}>
                                         <label htmlFor="seat" className="block text-lg font-medium text-gray-700 text-md">
                                                 Select Seat
                                         </label>
@@ -392,7 +396,7 @@ function Cart() {
                                                 </button>
                                             </div>
                                         </div>
-                                        <div className={pax && selectedHour ? "block": "hidden"}>
+                                        <div >
                                                     
                                                 <div name="seat" className="flex flex-wrap justify-start">
                                                 {seatArray ? seatArray.map((data, parentIndex) => {
@@ -470,24 +474,51 @@ function Cart() {
                                         </div>
                                         
                                 </div>
+                                {/* <div className={completed && localStorage.getItem("currentUser")? "block my-20" : "hidden"}> */}
+                                    
+                                    {
+                                        
+                                        newData ? newData.map((data) => {
+                                            return (
+                                                <>
+                                                    <h1 className='py-5 mt-4 text-gray-900 text-md line-mid'>Order & Appointment Completion</h1>
+                                                    <div className='flex items-center '>
+                                                        
+                                                        <img src={data.qrLink} className="w-40 "></img>
+                                                        <div className='ml-20'>
+                                                            <div className='flex'>
+                                                                <p className='w-20'> Email:</p>
+                                                                <h1>{localStorage.getItem("currentUser")}</h1>
+                                                            </div>
+                                                            
+                                                            <div className='flex'>
+                                                                <p className='w-20'> Pax:</p>
+                                                                <h1>{data.pax} person</h1>
+                                                            </div>
+                                                            <div className='flex'>
+                                                                <p className='w-20'> Seat area:</p>
+                                                                <h1>{data.seat}</h1>
+                                                            </div>
+                                                            <div className='flex'>
+                                                                <p className='w-20'> Time:</p>
+                                                                <h1>{data.selectedHour}:00</h1>
+                                                            </div>
+                                                            <div className='flex'>
+                                                                <p className='w-20'> Total:</p>
+                                                                <h1>₱ {data.total + 50}</h1>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </>
+                                                )
+                                            
+                                        }) 
+                                        : ""
+                                    }
+                                {/* </div> */}
                         </div>
                             
-                        {/* <div className={completed ? "block" : "hidden"}> */}
-                  {
-                      
-                                newData ? newData.map((data) => {
-                                    return(
-                                        <div className='flex'>
-                                                    {data.qrLink}
-                                                    <img src={data.qrLink}></img>
-                                            
-                                        </div>
-                                        )
-                                    
-                                }) 
-                                : ""
-                            }
-                        {/* </div> */}
+                        
                     </div>
             
         </div>

@@ -211,6 +211,7 @@ function urlNameStorage(url, key,id) {
   
   const saveChanges = () => {
     setLoading(true)
+    console.log(currentData)
     db_update(ref(db, "items/" + currentData), {
         itemName,
         itemDescription,
@@ -307,6 +308,7 @@ function urlNameStorage(url, key,id) {
                                                             <option value="Beverage">Beverage</option>
                                                             <option value="Noodles">Noodles</option>
                                                             <option value="Steak">Steak</option>
+                                                            <option value="Dessert">Dessert</option>
                                                             
                                                         </select>
                                                     </div>
@@ -325,8 +327,7 @@ function urlNameStorage(url, key,id) {
                                                             <option value="Appetizer">Appetizer</option>
                                                             <option value="Main course">Main course</option>
                                                             <option value="Salad">Salad</option>
-                                                            
-                                                            
+                                                            <option value="Dessert">Dessert</option>
                                                         </select>
                                                     </div>
                                                   </div>

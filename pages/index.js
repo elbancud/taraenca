@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 
 //addons
 import { Sling as Hamburger } from 'hamburger-react';
@@ -19,6 +19,10 @@ export default function Home() {
   const [isBurgerOpen, setBurgerOpen] = useState(false)
   const [tabSelectedfromChild, setTabSelectedFromChild] = useState("order");
   
+  const[currentUser, setCurrentUser] = useState("")
+  useEffect(() => {
+    setCurrentUser(localStorage.getItem("currentUser"))
+  }, [])
   return (
     <>
       <Head>
@@ -45,7 +49,7 @@ export default function Home() {
         </div>
         
         <div className='w-full '>
-            <div>
+            <div className={currentUser ? "block" : "hidden"}>
                 <HeaderCart/>
             </div>
             <div className={tabSelectedfromChild === "about" ? "block " : "hidden" }>
@@ -59,7 +63,7 @@ export default function Home() {
               <ResetPassword/>
             </div>
             <div className='w-full'>
-                <div className={tabSelectedfromChild === "order" ? "block " : "hidden" }>
+                <div div className={tabSelectedfromChild === "order" ? "block " : "hidden" }>
                       <Order setForgotPassword={(tabName)=>{setTabSelectedFromChild(tabName)}}/>
                     </div>
             </div>
