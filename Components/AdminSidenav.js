@@ -63,14 +63,14 @@ function AdminSidenav({ selectedTab }) {
                                 Dashboard
                             </div>
                           </li>
-                          <li className="rounded mb-1 flex items-center py-1 px-1  cursor-pointer hover:bg-[#dfdfdf]" onClick={() => { selectedTab("adminAccounts") }}>
+                          {/* <li className="rounded mb-1 flex items-center py-1 px-1  cursor-pointer hover:bg-[#dfdfdf]" onClick={() => { selectedTab("adminAccounts") }}>
                             <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="gray" strokeWidth={2}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
                             </svg>
                             <div className='mx-4 font-semibold'>
                                 Admins
                             </div>
-                          </li>
+                          </li> */}
 
                           <li className="rounded mb-1 flex items-center py-1  px-1 cursor-pointer hover:bg-[#dfdfdf]" onClick={() => { selectedTab("adminItems") }}>
                             <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="gray" strokeWidth={2}>
@@ -118,7 +118,6 @@ function AdminSidenav({ selectedTab }) {
                                 <div className={dropdown? "focus:bg-[white]": "hidden"} >
                                     <div  className='z-50 overflow-hidden absolute bottom-10 w-9/12 right-5 rounded-md bg-[white] shadow-lg font-semibold text-gray-500'>
                                         <ul >
-                                            <li className='py-2 px-5 hover:bg-[#dfdfdf]'>Account</li>
                                             <li onClick={ handleLogout} className='py-2 px-5 hover:bg-[#dfdfdf] bg-gray-50 border-t border-t-slate-200 '>Logout</li>
                                         </ul>
                                     </div>

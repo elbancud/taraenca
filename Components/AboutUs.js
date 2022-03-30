@@ -8,7 +8,9 @@ import Image from 'next/image'
 
 function AboutUs() {
   return (
-      <div className='flex items-center h-screen'>
+    <div className='w-full'>
+
+      <div className='flex items-center h-screen m-auto w-max'>
           <div >
             
             {/* texts */}
@@ -38,7 +40,9 @@ function AboutUs() {
             </div>
           </div>
           
+      </div>
     </div>
+      
   )
 }
 

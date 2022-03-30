@@ -21,9 +21,9 @@ function sideNav({selectedTab}) {
                 <div className="relative z-10 flex justify-center w-full font__secondary">
                     <ul className="text-center text-white">
                         <li className="my-4 cursor-pointer hover:underline" onClick={()=>{selectedTab("about")}}><a>About Us</a></li>
-                          <li className="my-4 cursor-pointer hover:underline" onClick={() => { selectedTab("contact") }}><a>Contact Us</a></li>
+                        {/* <li className="my-4 cursor-pointer hover:underline" onClick={() => { selectedTab("contact") }}><a>Contact Us</a></li> */}
                         <li className="my-4 cursor-pointer hover:underline" onClick={() => { selectedTab("order") }}><a>Order</a></li>
-                        <li className="my-4 cursor-pointer hover:underline" onClick={() => { selectedTab("support") }}><a>User Support</a></li>
+                        {/* <li className="my-4 cursor-pointer hover:underline" onClick={() => { selectedTab("support") }}><a>User Support</a></li> */}
                         
                     </ul>
                 </div>

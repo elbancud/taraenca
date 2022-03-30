@@ -1,14 +1,17 @@
 import React, {useState, useEffect} from 'react'
 import { db } from './Firebase/firebase'
 import { push, ref, onValue, update as db_update, remove, getDatabase } from "firebase/database";
+import { v4 as uuidv4 } from 'uuid';
 
 function AdminHome() {
 
 const [update, setUpdate] = useState(false);
 const [itemsArray, setItemsArray] = useState();
+const [seatArray, setSeatArray] = useState();
+const seatRow = ['A','B','C','D','E','F','G','H','I','J','K','L','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
     
 useEffect(() => {
-  
+      
       const db = getDatabase();
       const dbRef = ref(db, "items")
       
@@ -22,73 +25,109 @@ useEffect(() => {
         }
 
         setItemsArray(itemsArray);
+        const dbGrp = ref(db, "seat-arrangement")
+        
+        onValue(dbGrp, (snapshot) => {
+            const snap = snapshot.val();
+            const seatArray = [];
 
+            for (let id in snap) {
+                seatArray.push({id, ...snap[id]})
+            }
+
+            setSeatArray(seatArray);
+
+        })
         
       })
     }, [update])
 
   return (
-    <div className='h-screen border-l border-b-slate-100'>
+    <div className='h-full border-l border-b-slate-100'>
         <header className='px-8 py-6 border-t border-b border-b-slate-200'>
             <h2 className='text-xl font-semibold '>Dashboard</h2>
         </header>
         
         <section className='px-8 py-6 border-b border-b-slate-200'>
             <div className='mb-2'>
-                <p className='text-sm font-semibold uppercase'>Admin </p>
+                <p className='text-sm font-semibold uppercase'>Seat Plan </p>
             </div>
-            <div  className='inline-block mb-2 mr-2 border rounded border-b-slate-200'>
-                <div className='bg-[#b43333] rounded flex items-center'>
-                    <div className='py-2 px-7 text-[#fff]'>
-                        A1
-                    </div>
-                    <div className=' bg-[white] py-2 px-2'>
-                                <div className='mx-7'>
-                                    <h2 className='font-semibold'>Admin 1</h2>
-                                    <p className='-mt-1 text-sm'>3 activities</p>
+            <div  className='inline-block mb-2 mr-2 '>
+                <div className="flex flex-wrap justify-start">
+                        {seatArray ? seatArray.map((data, parentIndex) => {
+                             const id = uuidv4();
+
+                            return(
+                                <div className="m-1 max-w-fit" key={data.id}>
+                                    <div className="flex justify-center">
+                                         <div className="">
+                                            <h5 className="primary-color-text-custom ">Group {parentIndex + 1}</h5>
+                                        </div>
+                                    </div>
+                                    {
+                                            Object.values(data).map((key, indexLvl1) => {
+                                            
+                                                const id1 = uuidv4();
+                                                
+                                                if (typeof (key) === "object") {
+                                                    
+                                                    return (
+                                                        
+                                                        <div className="flex items-center" key={id1}>
+                                                             
+                                                            <h6>{seatRow[indexLvl1 - 1]}</h6>
+                                                            {Object.values(key).map((child, index) => {
+
+                                                                    const id2 = uuidv4();
+
+                                                                    if (child.reserved === true) {
+                                                                         return (
+                                                                             <div className="p-2 rounded-md" key={id2}>
+                                                                                    
+                                                                                    <span>
+                                                                                        {/* <Tooltip title="Click for action"> */}
+                                                                                                    <button variant="contained"  className='relative px-4 py-2 text-sm font-medium text-white bg-[gray] border border-transparent rounded-md group hover:bg-[#5a3e34] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:bg-[#50382F]' disableElevation>
+                                                                                                        {index + 1}
+                                                                                                    </button>
+                                                                                            
+                                                                                        {/* </Tooltip> */}
+                                                                                    </span>
+                                                                                </div> 
+                                                                        )
+                                                                    } else {
+                                                                            const id3 = uuidv4();
+                                                                        
+                                                                            return (
+                                                                                <div className="p-2 rounded-md" key = {id3}>
+                                                                                    {/* <Tooltip title="Click for action"> */}
+                                                                                                <button variant="contained"  className='relative px-4 py-2 text-sm font-medium text-white bg-[green] border border-transparent rounded-md group hover:bg-[#5a3e34] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:bg-[#50382F]' disableElevation>
+
+                                                                                                    {index + 1}
+                                                                                                </button>
+                                                                                    {/* </Tooltip> */}
+                                                                                </div> 
+                                                                            )
+                                                                    }
+                                                                    
+                                                                
+                                                                })
+                                                            }
+
+                                                        </div>
+                                                    )
+                                                } 
+                                                
+                                        })
+                                    }
+                                 
                                 </div>
-                    </div>
-                </div>
+                                
+                            )
+
+                            }) : "No registered rows, groups , and columns yet "}
+                        </div>
             </div>
-            <div  className='inline-block mb-2 mr-2 border rounded border-b-slate-200'>
-                <div className='bg-[#9cb433] rounded flex items-center'>
-                    <div className='py-2 px-7 text-[#fff]'>
-                        A2
-                    </div>
-                    <div className=' bg-[white] py-2 px-2'>
-                                <div className='mx-7'>
-                                    <h2 className='font-semibold'>Admin 2</h2>
-                                    <p className='-mt-1 text-sm'>3 activities</p>
-                                </div>
-                    </div>
-                </div>
-            </div>
-            <div  className='inline-block mb-2 mr-2 border rounded border-b-slate-200'>
-                <div className='bg-[#33b489] rounded flex items-center'>
-                    <div className='py-2 px-7 text-[#fff]'>
-                        A3
-                    </div>
-                    <div className=' bg-[white] py-2 px-2'>
-                                <div className='mx-7'>
-                                    <h2 className='font-semibold'>Admin 3</h2>
-                                    <p className='-mt-1 text-sm'>3 activities</p>
-                                </div>
-                    </div>
-                </div>
-            </div>
-            <div  className='inline-block mb-2 mr-2 border rounded border-b-slate-200'>
-                <div className='bg-[#4b33b4] rounded flex items-center'>
-                    <div className='py-2 px-7 text-[#fff]'>
-                        A4
-                    </div>
-                    <div className=' bg-[white] py-2 px-2'>
-                                <div className='mx-7'>
-                                    <h2 className='font-semibold'>Admin 4</h2>
-                                    <p className='-mt-1 text-sm'>3 activities</p>
-                                </div>
-                    </div>
-                </div>
-            </div>
+            
         </section>
 <section>
           <div className="flex flex-col">
@@ -110,7 +149,7 @@ useEffect(() => {
                                 <th scope="col" className="px-6 py-3 text-sm font-medium text-gray-900">
                                     Meal course
                                 </th>
-                                <th scope="col" clasName="text-sm font-medium text-gray-900 px-6 py-3">
+                                <th scope="col" className="px-6 py-3 text-sm font-medium text-gray-900">
                                     Images
                                 </th>
                                 <th scope="col" className="px-6 py-3 text-sm font-medium text-gray-900">

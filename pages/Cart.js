@@ -99,7 +99,7 @@ function Cart() {
         let seat =  " Group : " + group + " " + rowTitle+colSeat 
         let data = "Name: " + localStorage.getItem("currentUser")
 
-        const qrLink = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" +pax+"pax"+ data + " " + seat
+        const qrLink = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" +pax+"pax"+ data + " " + seat + " TOTAL: " +total
 
         db_update(ref(db, "seat-arrangement/" + dbSeat), {
             reserved: true
