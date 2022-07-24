@@ -43,7 +43,7 @@ function AdminLogin({ setForgotPassword }) {
             <h2 className="mt-6 text-2xl font-bold text-center text-gray-900">Sign in to your admin account</h2>
           </div>
 
-                <div className='py-1'></div>
+<div className='py-1'></div>
                 
                 <div className='my-5 '>
                   <label htmlFor="email-address" className="sr-only">
@@ -61,9 +61,9 @@ function AdminLogin({ setForgotPassword }) {
                 </div>
                 
                 <div className='my-5 '>
-                  <div className='flex justify-end '>
+                  {/* <div className='flex justify-end '>
                     <p className=' font-semibold cursor-pointer text-[#924426]'   onClick={() => { setForgotPassword("resetPass") }}>Forgot password?</p>
-                  </div>
+                  </div> */}
                   
                   <label htmlFor="password" className="sr-only">
                     Password

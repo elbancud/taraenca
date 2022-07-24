@@ -184,7 +184,7 @@ useEffect(() => {
                                           <td className="px-6 py-3 text-sm font-light text-gray-900 whitespace-nowrap">
                                               image
                                           </td>
-                                          <td className="px-6 py-3 text-sm font-light text-gray-900 whitespace-nowrap">
+                                          <td className="max-w-xs px-6 py-3 overflow-hidden text-sm font-light text-gray-900 whitespace-nowrap">
                                               {data.itemDescription}
                                           </td>
                                           <td className="px-6 py-3 text-sm font-light text-gray-900 whitespace-nowrap">
