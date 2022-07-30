@@ -10,15 +10,37 @@
 This is full stack  e-commerce made in NEXT JS.
 ```
 
+> ⚠️ This is a school project mainly for demonstration purposes! ⚠️
+
 ## Features
 
 ### Landing Page
 
 <div align="center" display="flex">
-    <img src="github/assets/landingPage.JPG" width=200 height=150/>
-    <img src="github/assets/itemPage.JPG" width=200 height=150/>
-    <img src="github/assets/checkout.JPG" width=200 height=150/>
+    <img src="github/assets/landingPage.JPG" width=250 height=150/>
+    <img src="github/assets/itemPage.JPG" width=250 height=150/>
+    <img src="github/assets/checkout.JPG" width=250 height=150/>
 
+</div>
+
+### Admin interaction
+
+> Dynamic interaction enabled; Admin can interact with CRUD operation
+
+<div align="center" display="flex">
+    <img src="github/assets/adminItems.JPG" />
+</div>
+
+> Admin can view the overall information of the website
+
+<div align="center" display="flex">
+    <img src="github/assets/orders.JPG" />
+</div>
+
+> Registration of seat
+
+<div align="center" display="flex">
+    <img src="github/assets/seats.JPG" />
 </div>
 
 # Technologies used
@@ -34,13 +56,15 @@ This is full stack  e-commerce made in NEXT JS.
 First, run the development server:
 
 ```bash
-npm run dev
+$ npm i
+$ npm run dev
 # or
-yarn dev
+$ yarn dev
 ```
 
-<!--
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+<!--
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
