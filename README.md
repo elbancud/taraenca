@@ -15,9 +15,9 @@ This is full stack  e-commerce made in NEXT JS.
 ### Landing Page
 
 <div align="center" display="flex">
-    <img src="./github/assets/landingPage" width=200 height=150/>
-    <img src="./github/assets/itemPage" width=200 height=150/>
-    <img src="./github/assets/checkout" width=200 height=150/>
+    <img src="./github/assets/landingPage.jpg" width=200 height=150/>
+    <img src="./github/assets/itemPage.jpg" width=200 height=150/>
+    <img src="./github/assets/checkout.jpg" width=200 height=150/>
 
 </div>
 
