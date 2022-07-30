@@ -1,8 +1,25 @@
+<div align="center">
+
+![Logo](./pages/Assets/taraenca.png)
+
+</div>
+
 ## About the project
 
 ```
-This is a 'beginner' e-commerce made in NEXT JS
+This is full stack  e-commerce made in NEXT JS.
 ```
+
+## Features
+
+### Landing Page
+
+<div align="center" display="flex">
+    <img src="./github/assets/landingPage" width=200 height=150/>
+    <img src="./github/assets/itemPage" width=200 height=150/>
+    <img src="./github/assets/checkout" width=200 height=150/>
+
+</div>
 
 # Technologies used
 
@@ -10,6 +27,7 @@ This is a 'beginner' e-commerce made in NEXT JS
 [x] Firebase
 [x] Google account authentication
 [x] Next JS
+[x] Material UI
 
 ## Getting Started
 
@@ -19,26 +37,6 @@ First, run the development server:
 npm run dev
 # or
 yarn dev
-```
-
-# In the website:
-
-### users can:
-
-```
-[x] signin using google account
-[x] choose a meal
-[x] reserve a seat
-[x] checkout with total amount of order
-```
-
-### admins can:
-
-```
-[x] add anodther admin using google account
-[x] register a meal: upload image, description
-[x] manage seats: register a seat row and column, delete
-[x] view orders & cancel orders
 ```
 
 <!--
