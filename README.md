@@ -31,7 +31,7 @@ This is full stack  e-commerce made in NEXT JS.
     <img src="github/assets/adminItems.JPG" />
 </div>
 
-> Admin can view the overall information of the website
+> Admin can view the overall orders, QR is also working.
 
 <div align="center" display="flex">
     <img src="github/assets/orders.JPG" />
@@ -50,6 +50,7 @@ This is full stack  e-commerce made in NEXT JS.
 [x] Google account authentication
 [x] Next JS
 [x] Material UI
+[x] QR
 
 ## Getting Started
 
