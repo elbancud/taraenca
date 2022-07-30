@@ -10,7 +10,7 @@
 This is full stack  e-commerce made in NEXT JS.
 ```
 
-> ⚠️ This is a school project mainly for demonstration purposes! ⚠️
+> ⚠️ Beginner coding alert ⚠️
 
 ## Features
 
